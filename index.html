@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小梁 - 全栈工程师</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 25px 0;
+            border-bottom: 1px solid #f0f0f0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #222;
+        }
+        
+        .logo span {
+            color: #555;
+            font-weight: 400;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+        }
+        
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #222;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #222;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #555;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            margin-top: 50px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            background: #fff;
+            color: #222;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background: #f9f9f9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            border-color: #ccc;
+        }
+        
+        .btn-primary {
+            background: #222;
+            color: #fff;
+            border-color: #222;
+        }
+        
+        .btn-primary:hover {
+            background: #333;
+            border-color: #333;
+        }
+        
+        /* 技能部分 */
+        .skills {
+            padding: 100px 0;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #222;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .skills-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 300px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .skill-category h3 {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #222;
+            font-weight: 600;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-category h3 i {
+            margin-right: 12px;
+            color: #222;
+        }
+        
+        .skill-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            background: #f8f8f8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+            color: #222;
+            border: 1px solid #eee;
+        }
+        
+        .skill-info {
+            flex: 1;
+        }
+        
+        .skill-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .skill-desc {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        /* 联系方式 */
+        .contact {
+            padding: 100px 0;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #222;
+            font-weight: 600;
+        }
+        
+        .contact-info p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .contact-details {
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #f8f8f8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 20px;
+            color: #222;
+            border: 1px solid #eee;
+        }
+        
+        .contact-text {
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .contact-text span {
+            display: block;
+            font-size: 0.95rem;
+            color: #777;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+        
+        .contact-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .contact-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* 页脚 */
+        footer {
+            background: #fafafa;
+            padding: 50px 0 30px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .social-links {
+            margin: 30px 0;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            color: #222;
+            text-decoration: none;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            font-size: 20px;
+        }
+        
+        .social-links a:hover {
+            background: #222;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+        
+        .footer-text {
+            color: #777;
+            font-size: 0.95rem;
+            margin-top: 30px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .skills-container {
+                flex-direction: column;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">小梁<span> · 全栈工程师</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#skills">专业技能</a></li>
+                    <li><a href="#projects">项目经验</a></li>
+                    <li><a href="#contact">联系方式</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="fade-in">小梁</h1>
+            <h2 class="fade-in delay-1">全栈开发工程师 & 技术解决方案专家</h2>
+            <p class="fade-in delay-2">专注于构建高性能、可扩展的Web应用程序，融合前端美学与后端逻辑，提供端到端的数字解决方案。拥有5年全栈开发经验，擅长将复杂需求转化为优雅的代码实现。</p>
+            <div class="hero-buttons fade-in delay-3">
+                <a href="#contact" class="btn btn-primary">联系我</a>
+                <a href="#skills" class="btn">查看技能</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 专业技能 -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>专业技能</h2>
+                <p>精通现代Web开发技术栈，从前端到后端，从设计到部署</p>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-laptop-code"></i>前端开发</h3>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">HTML5 & CSS3</div>
+                            <div class="skill-desc">语义化标签、Flexbox、Grid、响应式设计</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">JavaScript & TypeScript</div>
+                            <div class="skill-desc">ES6+、异步编程、DOM操作、类型系统</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">React & Vue.js</div>
+                            <div class="skill-desc">组件化开发、状态管理、路由、Hooks</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">UI/UX 设计</div>
+                            <div class="skill-desc">用户体验设计、交互原型、设计系统</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category fade-in delay-1">
+                    <h3><i class="fas fa-server"></i>后端开发</h3>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Node.js & Express</div>
+                            <div class="skill-desc">RESTful API、中间件、性能优化</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Python & Django</div>
+                            <div class="skill-desc">MVC架构、ORM、模板引擎</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">数据库设计</div>
+                            <div class="skill-desc">MySQL、MongoDB、Redis、数据建模</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">云服务 & DevOps</div>
+                            <div class="skill-desc">AWS、Docker、CI/CD、服务器部署</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>联系我</h2>
+                <p>如果您有项目需求或技术咨询，欢迎随时联系</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <h3>与我取得联系</h3>
+                    <p>作为一名全栈工程师，我专注于提供高质量的Web开发解决方案。无论是前端界面设计、后端API开发，还是全栈项目实现，我都能为您提供专业的技术支持。</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-kickstarter"></i>
+                            </div>
+                            <div class="contact-text">
+                                快手
+                                <span>@4946054873</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                邮箱
+                                <span>contact@xiaoliang.dev</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                工作地点
+                                <span>北京市海淀区中关村科技园</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-image fade-in delay-1">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="全栈开发工作环境">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="logo">小梁 · 全栈工程师</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-weixin"></i></a>
+                <a href="#"><i class="fab fa-kickstarter"></i></a>
+            </div>
+            <p class="footer-text">&copy; 2023 小梁个人主页. 保留所有权利</p>
+        </div>
+    </footer>
+
+    <script>
+        // 页面滚动时激活导航栏
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.05)';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.03)';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 技能动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+  </html>
